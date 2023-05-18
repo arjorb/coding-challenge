@@ -13,22 +13,42 @@ export default function isValidPassword(password = "") {
   if (password.length !== 10) return false;
 
   // The password that only has numbers is invalid
-  if (/^[0-9]+$/.test(password)) return false;
+  if (/^[0-9]*$/.test(password)) return false;
 
   // The password that only has characters is invalid
-  if (/^[A-Za-z]+$/.test(password)) return false;
+  if (/^[A-Za-z]*$/.test(password)) return false;
 
   // a password with special characters is invalid
   if (/[^a-zA-Z0-9]/.test(password)) return false;
 
-  // a password with only lower/upper case characters is invalid
+  // a password with only lower or upper case characters is invalid
   if (password === password.toLowerCase() || password === password.toUpperCase()) return false;
 
   //  forbidden password are invalid
   if (forbiddenPasswords.includes(password)) return false;
 
   // a password with a directly ascending/descending sequence of numbers is invalid
-  if (/012|123|234|345|456|567|678|789|987|876|765|654|543|432|321|210/.test(password)) return false;
+
+  const consecutiveNumbers = [
+    "012",
+    "123",
+    "234",
+    "345",
+    "456",
+    "567",
+    "678",
+    "789",
+    "987",
+    "876",
+    "765",
+    "654",
+    "543",
+    "432",
+    "321",
+    "210",
+  ].some((consecutive) => password.includes(consecutive));
+
+  if (consecutiveNumbers) return false;
 
   const setOfPassword = new Set([...password]);
   if (setOfPassword.size < 4) return false;
