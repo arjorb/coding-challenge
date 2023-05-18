@@ -28,7 +28,6 @@ export default function isValidPassword(password = "") {
   if (forbiddenPasswords.includes(password)) return false;
 
   // a password with a directly ascending/descending sequence of numbers is invalid
-
   const consecutiveNumbers = [
     "012",
     "123",
