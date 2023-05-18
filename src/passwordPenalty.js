@@ -17,10 +17,8 @@ export default function penaltyPoints(password = "") {
       }
     }
   
-    if(wordDuplicate === 2){
-      return count = count + 1
-    }else if(wordDuplicate >= 3){
-      return count = count + 2
-    }
+    if (wordDuplicate === 2) return (count += 1);
+    if (wordDuplicate >= 3) return (count += 2);
+    
     return count
 }
