@@ -48,7 +48,6 @@ export default function isValidPassword(password = "") {
   // a password with only lower or upper case characters is invalid
   if (password === password.toLowerCase() || password === password.toUpperCase()) return false;
 
-  //  forbidden password are invalid
   if (forbiddenPasswords.includes(password)) return false;
 
   if (hasConsecutiveNumbers(password)) return false;
