@@ -5,6 +5,6 @@
  */
 
 // FUNCTION 1
-export default function countRs(letters) {
-  return letters.split('').filter(letter => letter == "R").length;
+export default function countLetterR(letters) {
+  return letters.split("").filter((letter) => letter === "R").length;
 }
