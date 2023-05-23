@@ -6,6 +6,30 @@ export const forbiddenPasswords = ["amG84h6yeQ", "mc9Q20pdjH", "jnT6Q2f8U5"];
  * @param {string} password
  * @returns {boolean}
  */
+
+const hasConsecutiveNumbers = (password) => {
+  const consecutiveNumbers = [
+    "012",
+    "123",
+    "234",
+    "345",
+    "456",
+    "567",
+    "678",
+    "789",
+    "987",
+    "876",
+    "765",
+    "654",
+    "543",
+    "432",
+    "321",
+    "210",
+  ].some((consecutive) => password.includes(consecutive));
+
+  return consecutiveNumbers;
+};
+
 export default function isValidPassword(password = "") {
   // The following line ensures, that password is always a string, like the number 128 -> string "128"
   if (typeof password !== "string") password = String(password);
@@ -27,27 +51,7 @@ export default function isValidPassword(password = "") {
   //  forbidden password are invalid
   if (forbiddenPasswords.includes(password)) return false;
 
-  // a password with a directly ascending/descending sequence of numbers is invalid
-  const consecutiveNumbers = [
-    "012",
-    "123",
-    "234",
-    "345",
-    "456",
-    "567",
-    "678",
-    "789",
-    "987",
-    "876",
-    "765",
-    "654",
-    "543",
-    "432",
-    "321",
-    "210",
-  ].some((consecutive) => password.includes(consecutive));
-
-  if (consecutiveNumbers) return false;
+  if (hasConsecutiveNumbers(password)) return false;
 
   const setOfPassword = new Set([...password]);
   if (setOfPassword.size < 4) return false;
