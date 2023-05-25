@@ -8,26 +8,8 @@ export const forbiddenPasswords = ["amG84h6yeQ", "mc9Q20pdjH", "jnT6Q2f8U5"];
  */
 
 const hasConsecutiveNumbers = (password) => {
-  const consecutiveNumbers = [
-    "012",
-    "123",
-    "234",
-    "345",
-    "456",
-    "567",
-    "678",
-    "789",
-    "987",
-    "876",
-    "765",
-    "654",
-    "543",
-    "432",
-    "321",
-    "210",
-  ].some((consecutive) => password.includes(consecutive));
-
-  return consecutiveNumbers;
+  const consecutiveNumbers = ["012", "123", "234", "345", "456", "567", "678", "789", "987", "876", "765", "654", "543", "432", "321", "210"];
+  return consecutiveNumbers.some((consecutive) => password.includes(consecutive));
 };
 
 export default function isValidPassword(password = "") {
@@ -35,6 +17,9 @@ export default function isValidPassword(password = "") {
   if (typeof password !== "string") password = String(password);
 
   if (password.length !== 10) return false;
+
+  if (forbiddenPasswords.includes(password)) return false;
+
 
   // The password that only has numbers is invalid
   if (/^[0-9]*$/.test(password)) return false;
@@ -48,11 +33,10 @@ export default function isValidPassword(password = "") {
   // a password with only lower or upper case characters is invalid
   if (password === password.toLowerCase() || password === password.toUpperCase()) return false;
 
-  if (forbiddenPasswords.includes(password)) return false;
-
   if (hasConsecutiveNumbers(password)) return false;
 
   const setOfPassword = new Set([...password]);
   if (setOfPassword.size < 4) return false;
   return true;
 }
+

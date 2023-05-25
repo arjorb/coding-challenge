@@ -8,19 +8,18 @@
 export default function penaltyPoints(password = "") {
   // The following line ensures, that password is always a string, like the number 128 -> string "128"
   if (typeof password !== "string") password = String(password);
-  if(password === 'null') return 0
-    let count = 0
-    let wordDuplicate = 1
-    for (let i = 0; i < password.length; i++) {
-      if (password[i] === password[i + 1]) {
-        wordDuplicate = wordDuplicate + 1
-      }
+  if (password === "null") return 0;
+  let count = 0;
+  let duplicate = 1;
+
+  for (let i = 0; i < password.length; i++) {
+    if (password[i] === password[i + 1]) {
+      duplicate += 1;
     }
-  
-    if(wordDuplicate === 2){
-      return count = count + 1
-    }else if(wordDuplicate >= 3){
-      return count = count + 2
-    }
-    return count
+  }
+
+  if (duplicate === 2) count += 1;
+  if (duplicate >= 3) count += 2;
+
+  return count;
 }
