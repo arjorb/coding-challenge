@@ -20,6 +20,7 @@ export default function isValidPassword(password = "") {
 
   if (forbiddenPasswords.includes(password)) return false;
 
+
   // The password that only has numbers is invalid
   if (/^[0-9]*$/.test(password)) return false;
 
